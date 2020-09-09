@@ -55,6 +55,24 @@ if __name__ == "__main__":
     
     player_name = input("Your name: ")
 
-    player = Player(name=player_name, current_room='outside')
+    player = Player(name=player_name, current_room=room['outside'])
 
-    print(room['outside'].s_to)
+    command = None
+
+    while command != 'q':
+        
+        print(player.current_room)
+        command = input("> ")
+        try:
+            if command == 'n':
+                player.current_room = player.current_room.n_to
+            elif command == 's':
+                player.current_room = player.current_room.s_to
+            elif command == 'e':
+                player.current_room = player.current_room.e_to
+            elif command == 'w':
+                player.current_room = player.current_room.w_to
+        except AttributeError:
+            print("You can't go that way")
+
+    exit()
