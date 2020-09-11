@@ -5,7 +5,7 @@ from item import Item
 # Declare all the rooms
 
 item = {
-    'gold coin':    Item('Gold Coin',
+    'coin':    Item('Gold Coin',
                         '''A simple gold coin. You wonder why the adventurers
                         left it behind.''')
 }
@@ -26,7 +26,7 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been mostly emptied by
-earlier adventurers. The only exit is to the south.""", [item['gold coin']]),
+earlier adventurers. The only exit is to the south.""", [item['coin']]),
 }
 
 
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     
     player_name = input("Your name: ")
 
-    player = Player(name=player_name, current_room=room['outside'])
+    player = Player(name=player_name, current_room=room['outside'], items=[])
 
     command = None
 
@@ -86,8 +86,14 @@ if __name__ == "__main__":
                     player.current_room = player.current_room.w_to
             except AttributeError:
                 print("You can't go that way")
+        
         elif len(command.split()) == 2 and command.split()[0] == 'take':
-            player.current_room.rem_item(command.split()[1])
-            player.add_items()
+            player.current_room.rem_item(item[command.split()[1]])
+            player.add_item(item[command.split()[1]])
+
+        elif len(command.split()) == 2 and command.split()[0] == 'drop':
+            player.current_room.add_item(item[command.split()[1]])
+            player.rem_item(item[command.split()[1]])
+
 
     exit()

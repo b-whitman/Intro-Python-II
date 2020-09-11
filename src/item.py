@@ -6,4 +6,7 @@ class Item():
 
     def __str__(self):
         return f'{self.name}:\t{self.description}'
-        
+
+    def __repr__(self):
+        return self.name    
+    
