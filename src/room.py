@@ -9,7 +9,8 @@ class Room():
         self.items = items
 
     def add_item(self, item):
-        self.items.append(item) 
+        self.items.append(item)
+        item.on_drop()  
 
     def rem_item(self, item):
         self.items.remove(item)

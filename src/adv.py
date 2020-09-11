@@ -88,12 +88,18 @@ if __name__ == "__main__":
                 print("You can't go that way")
         
         elif len(command.split()) == 2 and command.split()[0] == 'take':
-            player.current_room.rem_item(item[command.split()[1]])
-            player.add_item(item[command.split()[1]])
+            try:
+                player.current_room.rem_item(item[command.split()[1]])
+                player.add_item(item[command.split()[1]])
+            except KeyError:
+                print("I don't see an item like that...")
 
         elif len(command.split()) == 2 and command.split()[0] == 'drop':
-            player.current_room.add_item(item[command.split()[1]])
-            player.rem_item(item[command.split()[1]])
+            try:
+                player.current_room.add_item(item[command.split()[1]])
+                player.rem_item(item[command.split()[1]])
+            except KeyError:
+                print("You're not holding anything like that...")
 
 
     exit()
